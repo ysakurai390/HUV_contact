@@ -3,333 +3,362 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ご利用案内・お問い合わせ | NanoAct</title>
+  <title>ご利用案内・お問い合わせ | HUV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green:     #1a9e6f;
-      --green-lt:  #e8f7f2;
-      --amber:     #d97706;
-      --amber-lt:  #fef3e2;
-      --red:       #dc2626;
-      --red-lt:    #fef2f2;
-      --blue:      #2563eb;
-      --blue-lt:   #eff6ff;
-      --bg:        #f8f8f6;
-      --surface:   #ffffff;
-      --border:    rgba(0,0,0,0.08);
-      --border-md: rgba(0,0,0,0.12);
-      --text:      #111111;
-      --text-2:    #444444;
-      --text-3:    #888888;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --radius-xl: 32px;
-      --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --bg: #f3f1eb;
+      --paper: #f8f6f0;
+      --paper-2: #eeeae0;
+      --ink: #141414;
+      --muted: #5c5a54;
+      --faint: #8a857b;
+      --line: #cfc8ba;
+      --line-dark: #a9a194;
+      --white: #ffffff;
+      --red: #b4271d;
+      --transition: 0.22s ease;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: "Noto Sans JP", "Inter", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      font-family: "Noto Sans JP", "Inter", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
     }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(243,241,235,0.24) 0%, var(--bg) 54%),
+        url("./assets/mobility-top.jpg") center top / cover no-repeat;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.58) 0, rgba(0,0,0,0.42) 360px, rgba(243,241,235,0.96) 640px),
+        repeating-linear-gradient(90deg, rgba(20,20,20,0.035) 0 1px, transparent 1px 92px);
+      pointer-events: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(248,248,246,0.88);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
+      z-index: 10;
+      padding: 14px 18px;
+      background: rgba(15,15,15,0.38);
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .topbar-inner {
-      max-width: 900px;
+      width: min(1120px, 100%);
       margin: 0 auto;
-      height: 54px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 18px;
     }
 
     .topbar-logo {
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
+      min-width: 0;
     }
 
-    .topbar-logo .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green);
+    .topbar-logo img {
+      display: block;
+      width: clamp(132px, 22vw, 214px);
+      height: auto;
+      filter: invert(1) drop-shadow(0 1px 16px rgba(0,0,0,0.36));
     }
 
     .lang-switcher {
       display: flex;
       align-items: center;
-      gap: 3px;
+      gap: 2px;
       flex-shrink: 0;
-      background: rgba(0,0,0,0.04);
-      border: 1px solid var(--border);
-      border-radius: 999px;
       padding: 3px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.28);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .lang-btn {
-      border: none;
-      background: none;
+      min-height: 28px;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,0.64);
       cursor: pointer;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-3);
-      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
-      letter-spacing: 0.02em;
-      line-height: 1.4;
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: background var(--transition), color var(--transition);
     }
 
-    .lang-btn:hover { color: var(--text); background: rgba(255,255,255,0.7); }
-
+    .lang-btn:hover,
     .lang-btn.active {
-      background: var(--surface);
-      color: var(--text);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.9);
+      color: var(--ink);
     }
 
     .wrap {
-      max-width: 900px;
+      width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 74px 0 56px;
     }
 
     .hero {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-lg);
-      padding: 48px 48px 44px;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
+      min-height: 360px;
+      display: grid;
+      align-content: end;
+      gap: 22px;
+      padding: min(7vw, 72px) 0 44px;
+      color: var(--white);
+      text-shadow: 0 2px 18px rgba(0,0,0,0.36);
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 100% 0%, rgba(26,158,111,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 0% 100%, rgba(37,99,235,0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-badge {
+    .eyebrow {
       display: inline-flex;
+      width: max-content;
       align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      background: var(--green-lt);
-      color: var(--green);
-      border-radius: 999px;
+      gap: 10px;
+      color: rgba(255,255,255,0.86);
+      font-family: "Inter", sans-serif;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-weight: 800;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: currentColor;
     }
 
     .hero h1 {
-      font-size: clamp(28px, 5vw, 46px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 14px;
-      color: var(--text);
+      max-width: 820px;
+      font-family: "Inter", "Noto Sans JP", sans-serif;
+      font-size: clamp(44px, 9vw, 92px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 0.92;
+      text-transform: uppercase;
+      text-shadow: 0 3px 24px rgba(0,0,0,0.5);
     }
 
     .hero-sub {
-      color: var(--text-3);
-      font-size: 15px;
-      font-weight: 400;
-      max-width: 580px;
-      line-height: 1.75;
+      max-width: 680px;
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 700;
+      line-height: 1.8;
+    }
+
+    .support-panel {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1.08fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(248,246,240,0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .panel-intro {
+      padding: 46px 42px 42px 34px;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .section-label {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .panel-intro h2 {
+      margin-bottom: 16px;
+      font-size: clamp(24px, 3.1vw, 34px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.18;
+    }
+
+    .panel-intro p {
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .links {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      display: grid;
+      min-width: 0;
     }
 
     .link-card {
       display: grid;
-      grid-template-columns: 72px 1fr auto;
-      gap: 20px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
       align-items: center;
-      text-decoration: none;
-      color: var(--text);
-      padding: 24px 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-      position: relative;
-      overflow: hidden;
+      min-height: 160px;
+      padding: 34px 0 34px 38px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      transition: background var(--transition);
     }
 
-    .link-card::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      border-radius: 4px 0 0 4px;
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
+    .link-card:last-child { border-bottom: 0; }
+    .link-card:hover { background: rgba(255,255,255,0.42); }
 
-    .link-card.guide::before   { background: var(--green); }
-    .link-card.contact::before { background: var(--blue); }
-    .link-card.emergency::before { background: var(--red); }
-
-    .link-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--border-md); }
-    .link-card:hover::before { opacity: 1; }
-
-    .card-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      flex-shrink: 0;
-      transition: transform var(--transition);
-    }
-
-    .link-card:hover .card-icon { transform: scale(1.05); }
-
-    .link-card.guide   .card-icon { background: var(--green-lt); }
-    .link-card.contact .card-icon { background: var(--blue-lt); }
-    .link-card.emergency .card-icon { background: var(--red-lt); }
-
-    .card-type {
+    .card-kicker {
       display: inline-flex;
       align-items: center;
-      padding: 3px 9px;
-      border-radius: 999px;
+      gap: 9px;
+      margin-bottom: 13px;
+      color: var(--faint);
+      font-family: "Inter", sans-serif;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
-    .link-card.guide   .card-type { background: var(--green-lt); color: var(--green); }
-    .link-card.contact .card-type { background: var(--blue-lt);  color: var(--blue); }
-    .link-card.emergency .card-type { background: var(--red-lt); color: var(--red); }
+    .card-kicker::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--line-dark);
+    }
 
     .card-content h2 {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
     }
 
     .card-content p {
+      max-width: 560px;
+      color: var(--muted);
       font-size: 14px;
-      color: var(--text-3);
-      line-height: 1.65;
-      margin: 0;
+      line-height: 1.8;
     }
 
     .card-cta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-      color: var(--text-3);
-      transition: color var(--transition);
-    }
-
-    .card-cta-arrow {
-      width: 32px;
-      height: 32px;
+      display: grid;
+      place-items: center;
+      width: 66px;
+      height: 66px;
+      margin-right: 8px;
+      border: 1px solid var(--line-dark);
       border-radius: 50%;
-      background: #f0f0ee;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      transition: background var(--transition), transform var(--transition), border-color var(--transition);
+      color: var(--ink);
+      font-size: 19px;
+      transition: transform var(--transition), background var(--transition), color var(--transition);
     }
 
-    .link-card.guide:hover   .card-cta-arrow { background: var(--green); border-color: var(--green); color: #fff; }
-    .link-card.contact:hover .card-cta-arrow { background: var(--blue);  border-color: var(--blue);  color: #fff; }
-    .link-card.emergency:hover .card-cta-arrow { background: var(--red); border-color: var(--red);   color: #fff; }
-
-    .link-card:hover .card-cta { color: var(--text-2); }
-    .link-card:hover .card-cta-arrow { transform: translate(3px, -3px); }
-
-    .footer {
-      text-align: center;
-      padding: 32px 0 0;
-      font-size: 12px;
-      color: var(--text-3);
+    .link-card:hover .card-cta {
+      transform: translate(4px, -4px);
+      background: var(--ink);
+      color: var(--paper);
     }
+
+    .link-card.emergency .card-kicker { color: var(--red); }
 
     .fade-up {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
-    .fade-up.visible { opacity: 1; transform: none; }
 
+    .fade-up.visible { opacity: 1; transform: none; }
     [data-i18n] { transition: opacity 0.18s ease; }
     .lang-switching [data-i18n] { opacity: 0; }
 
-    @media (max-width: 640px) {
-      .hero { padding: 32px 24px 28px; }
+    @media (max-width: 760px) {
+      .topbar { padding: 11px 10px; }
+      .topbar-inner { gap: 8px; min-width: 0; }
+      .topbar-logo { min-width: 0; }
+      .topbar-logo img { width: 112px; }
+      .lang-switcher { min-width: 0; }
+      .lang-btn { padding: 3px 5px; font-size: 10px; }
 
-      .link-card {
-        grid-template-columns: 56px 1fr;
-        grid-template-rows: auto auto;
-        padding: 20px;
-        gap: 14px;
+      .wrap {
+        width: min(100% - 28px, 1120px);
+        padding-top: 48px;
       }
 
-      .card-icon { width: 56px; height: 56px; font-size: 24px; }
-      .card-cta { grid-column: 2; margin-top: 4px; }
-      .card-content h2 { font-size: 17px; }
-      .lang-btn { padding: 4px 7px; font-size: 11px; }
+      .hero {
+        min-height: 320px;
+        padding-bottom: 30px;
+      }
+
+      .hero h1 { font-size: clamp(36px, 12.2vw, 56px); }
+      .hero-sub { font-size: 13px; }
+
+      .support-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-intro {
+        padding: 30px 14px 28px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-intro h2,
+      .panel-intro p {
+        overflow-wrap: anywhere;
+      }
+
+      .panel-intro h2 {
+        font-size: 23px;
+        line-height: 1.22;
+      }
+
+      .link-card {
+        min-height: 0;
+        grid-template-columns: 1fr 48px;
+        gap: 14px;
+        padding: 26px 14px;
+      }
+
+      .card-content h2 { font-size: 22px; }
+      .card-cta {
+        width: 48px;
+        height: 48px;
+        margin-right: 0;
+      }
     }
   </style>
 </head>
@@ -337,10 +366,9 @@
 
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="topbar-logo">
-        <span class="dot"></span>
-        <span data-i18n="nav.logo">NanoAct サポート</span>
-      </div>
+      <a class="topbar-logo" href="./" aria-label="HUV">
+        <img src="./assets/huv-logo-transparent-trimmed.png" alt="HUV" />
+      </a>
       <div class="lang-switcher" role="group" aria-label="Language">
         <button class="lang-btn active" data-lang="ja">日本語</button>
         <button class="lang-btn" data-lang="en">EN</button>
@@ -352,113 +380,94 @@
 
   <main class="wrap">
 
-    <section class="hero fade-up">
-      <div class="hero-badge">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <circle cx="5" cy="5" r="5" fill="#1a9e6f"/>
-        </svg>
-        NANOACT SUPPORT
-      </div>
-      <h1 data-i18n="hero.title">ご利用案内・<br>お問い合わせ</h1>
+    <section class="hero fade-up visible">
+      <div class="eyebrow">HUV / Beppu Mobility Support</div>
+      <h1 data-i18n="hero.title">Ride free.<br>Ask easy.</h1>
       <p class="hero-sub" data-i18n="hero.sub">ご利用方法の確認、お問い合わせ、緊急時の対応まで、必要な窓口へすぐアクセスできる総合案内ページです。</p>
     </section>
 
-    <section class="links">
+    <section class="support-panel fade-up visible">
+      <div class="panel-intro">
+        <span class="section-label">Support Guide</span>
+        <h2 data-i18n="panel.title">HUVの利用中に必要な案内を、ここから。</h2>
+        <p data-i18n="panel.desc">旅先の移動を止めないために、使い方、問い合わせ、緊急時の確認先をひとつにまとめました。</p>
+      </div>
 
-      <a class="link-card guide fade-up"
-         href="https://ysakurai390.github.io/HUV_user-guide/"
-         target="_blank" rel="noopener noreferrer">
-        <div class="card-icon">💡</div>
-        <div class="card-content">
-          <div class="card-type" data-i18n="card1.type">ガイド</div>
-          <h2 data-i18n="card1.title">使い方・よくある質問</h2>
-          <p data-i18n="card1.desc">車両の基本的な使い方、操作方法、利用前の注意点、よくある質問を確認できます。</p>
-        </div>
-        <div class="card-cta">
-          <span data-i18n="cta.open">ページを開く</span>
-          <div class="card-cta-arrow">↗</div>
-        </div>
-      </a>
+      <div class="links">
+        <a class="link-card guide"
+           href="https://ysakurai390.github.io/HUV_user-guide/"
+           target="_blank" rel="noopener noreferrer">
+          <div class="card-content">
+            <div class="card-kicker" data-i18n="card1.type">Guide</div>
+            <h2 data-i18n="card1.title">使い方・よくある質問</h2>
+            <p data-i18n="card1.desc">車両の基本的な使い方、操作方法、利用前の注意点、よくある質問を確認できます。</p>
+          </div>
+          <div class="card-cta" aria-hidden="true">↗</div>
+        </a>
 
-      <a class="link-card contact fade-up"
-         href="https://forms.office.com/Pages/ResponsePage.aspx?id=tXXefBLjeEmMcUNczENLjFiwHE9kCUhPi9AHtulHIeRURFgySlZEM05XRko0MTFQUkUzUzdZNUwxWi4u"
-         target="_blank" rel="noopener noreferrer">
-        <div class="card-icon">✉️</div>
-        <div class="card-content">
-          <div class="card-type" data-i18n="card2.type">お問い合わせ</div>
-          <h2 data-i18n="card2.title">お問い合わせフォーム</h2>
-          <p data-i18n="card2.desc">ご不明点やご相談がある場合は、こちらのフォームから内容を送信してください。</p>
-        </div>
-        <div class="card-cta">
-          <span data-i18n="cta.form">フォームを開く</span>
-          <div class="card-cta-arrow">↗</div>
-        </div>
-      </a>
+        <a class="link-card contact"
+           href="https://forms.office.com/Pages/ResponsePage.aspx?id=tXXefBLjeEmMcUNczENLjFiwHE9kCUhPi9AHtulHIeRURFgySlZEM05XRko0MTFQUkUzUzdZNUwxWi4u"
+           target="_blank" rel="noopener noreferrer">
+          <div class="card-content">
+            <div class="card-kicker" data-i18n="card2.type">Contact</div>
+            <h2 data-i18n="card2.title">お問い合わせフォーム</h2>
+            <p data-i18n="card2.desc">ご不明点やご相談がある場合は、こちらのフォームから内容を送信してください。</p>
+          </div>
+          <div class="card-cta" aria-hidden="true">↗</div>
+        </a>
 
-      <a class="link-card emergency fade-up"
-         href="https://ysakurai390.github.io/HUV_emergency-guide/"
-         target="_blank" rel="noopener noreferrer">
-        <div class="card-icon">🚨</div>
-        <div class="card-content">
-          <div class="card-type" data-i18n="card3.type">緊急</div>
-          <h2 data-i18n="card3.title">緊急時のご案内</h2>
-          <p data-i18n="card3.desc">事故・接触や車両トラブルが起きた際の対応手順を確認できます。</p>
-        </div>
-        <div class="card-cta">
-          <span data-i18n="cta.open">ページを開く</span>
-          <div class="card-cta-arrow">↗</div>
-        </div>
-      </a>
-
+        <a class="link-card emergency"
+           href="https://ysakurai390.github.io/HUV_emergency-guide/"
+           target="_blank" rel="noopener noreferrer">
+          <div class="card-content">
+            <div class="card-kicker" data-i18n="card3.type">Emergency</div>
+            <h2 data-i18n="card3.title">緊急時のご案内</h2>
+            <p data-i18n="card3.desc">事故・接触や車両トラブルが起きた際の対応手順を確認できます。</p>
+          </div>
+          <div class="card-cta" aria-hidden="true">↗</div>
+        </a>
+      </div>
     </section>
-
-    <footer class="footer">
-      <p data-i18n="footer">NanoAct サポート &nbsp;·&nbsp; ご不明な点はスタッフまでお気軽にお尋ねください</p>
-    </footer>
 
   </main>
 
   <script>
   const I18N = {
     ja: {
-      "nav.logo":"NanoAct サポート",
-      "hero.title":"ご利用案内・<br>お問い合わせ",
+      "hero.title":"Ride free.<br>Ask easy.",
       "hero.sub":"ご利用方法の確認、お問い合わせ、緊急時の対応まで、必要な窓口へすぐアクセスできる総合案内ページです。",
-      "card1.type":"ガイド","card1.title":"使い方・よくある質問","card1.desc":"車両の基本的な使い方、操作方法、利用前の注意点、よくある質問を確認できます。",
-      "card2.type":"お問い合わせ","card2.title":"お問い合わせフォーム","card2.desc":"ご不明点やご相談がある場合は、こちらのフォームから内容を送信してください。",
-      "card3.type":"緊急","card3.title":"緊急時のご案内","card3.desc":"事故・接触や車両トラブルが起きた際の対応手順を確認できます。",
-      "cta.open":"ページを開く","cta.form":"フォームを開く",
-      "footer":"NanoAct サポート &nbsp;·&nbsp; ご不明な点はスタッフまでお気軽にお尋ねください"
+      "panel.title":"HUVの利用中に必要な案内を、ここから。",
+      "panel.desc":"旅先の移動を止めないために、使い方、問い合わせ、緊急時の確認先をひとつにまとめました。",
+      "card1.type":"Guide","card1.title":"使い方・よくある質問","card1.desc":"車両の基本的な使い方、操作方法、利用前の注意点、よくある質問を確認できます。",
+      "card2.type":"Contact","card2.title":"お問い合わせフォーム","card2.desc":"ご不明点やご相談がある場合は、こちらのフォームから内容を送信してください。",
+      "card3.type":"Emergency","card3.title":"緊急時のご案内","card3.desc":"事故・接触や車両トラブルが起きた際の対応手順を確認できます。"
     },
     en: {
-      "nav.logo":"NanoAct Support",
-      "hero.title":"Support &amp; Contact",
-      "hero.sub":"A comprehensive support hub for usage guides, inquiries, and emergency procedures — all in one place.",
-      "card1.type":"GUIDE","card1.title":"How to Use & FAQ","card1.desc":"Check basic vehicle usage, operating instructions, precautions before use, and frequently asked questions.",
-      "card2.type":"CONTACT","card2.title":"Contact Form","card2.desc":"If you have any questions or concerns, please submit them through this form.",
-      "card3.type":"EMERGENCY","card3.title":"Emergency Guide","card3.desc":"Check the response procedures in case of an accident, collision, or vehicle trouble.",
-      "cta.open":"Open page","cta.form":"Open form",
-      "footer":"NanoAct Support &nbsp;·&nbsp; Please ask staff if you have any questions"
+      "hero.title":"Ride free.<br>Ask easy.",
+      "hero.sub":"A support hub for usage guides, inquiries, and emergency procedures, gathered in one place so your trip keeps moving.",
+      "panel.title":"Everything you may need while using HUV.",
+      "panel.desc":"Find the right destination for how-to guidance, contact, and emergency support without breaking the flow of your stay.",
+      "card1.type":"Guide","card1.title":"How to Use & FAQ","card1.desc":"Check basic vehicle usage, operating instructions, precautions before use, and frequently asked questions.",
+      "card2.type":"Contact","card2.title":"Contact Form","card2.desc":"If you have any questions or concerns, please submit them through this form.",
+      "card3.type":"Emergency","card3.title":"Emergency Guide","card3.desc":"Check the response procedures in case of an accident, collision, or vehicle trouble."
     },
     zh: {
-      "nav.logo":"NanoAct 支持中心",
-      "hero.title":"使用指南・联系我们",
+      "hero.title":"Ride free.<br>Ask easy.",
       "hero.sub":"这是一个综合服务页面，您可以快速访问使用说明、咨询表单以及紧急情况处理等所有相关入口。",
-      "card1.type":"使用指南","card1.title":"使用方法与常见问题","card1.desc":"您可以在此确认车辆的基本使用方法、操作说明、使用前注意事项及常见问题。",
-      "card2.type":"联系我们","card2.title":"联系表单","card2.desc":"如有疑问或需要咨询，请通过此表单提交您的内容。",
-      "card3.type":"紧急情况","card3.title":"紧急情况指南","card3.desc":"发生事故、碰撞或车辆故障时，可在此确认处理步骤。",
-      "cta.open":"打开页面","cta.form":"打开表单",
-      "footer":"NanoAct 支持中心 &nbsp;·&nbsp; 如有疑问，请随时咨询工作人员"
+      "panel.title":"HUV 使用过程中需要的指南，都在这里。",
+      "panel.desc":"为了不打断旅途中的移动体验，我们将使用方法、咨询入口和紧急情况处理指南整合在一起。",
+      "card1.type":"Guide","card1.title":"使用方法与常见问题","card1.desc":"您可以在此确认车辆的基本使用方法、操作说明、使用前注意事项及常见问题。",
+      "card2.type":"Contact","card2.title":"联系表单","card2.desc":"如有疑问或需要咨询，请通过此表单提交您的内容。",
+      "card3.type":"Emergency","card3.title":"紧急情况指南","card3.desc":"发生事故、碰撞或车辆故障时，可在此确认处理步骤。"
     },
     ko: {
-      "nav.logo":"NanoAct 고객지원",
-      "hero.title":"이용 안내 · 문의하기",
-      "hero.sub":"이용 방법 확인, 문의, 긴급 상황 대응까지 — 필요한 창구에 바로 접근할 수 있는 종합 안내 페이지입니다.",
-      "card1.type":"가이드","card1.title":"사용 방법 및 자주 묻는 질문","card1.desc":"차량의 기본 사용법, 조작 방법, 이용 전 주의사항, 자주 묻는 질문을 확인할 수 있습니다.",
-      "card2.type":"문의하기","card2.title":"문의 양식","card2.desc":"궁금한 점이나 상담이 필요한 경우 이 양식을 통해 내용을 보내주세요.",
-      "card3.type":"긴급 상황","card3.title":"긴급 상황 안내","card3.desc":"사고·충돌이나 차량 문제가 발생했을 때의 대응 절차를 확인할 수 있습니다.",
-      "cta.open":"페이지 열기","cta.form":"양식 열기",
-      "footer":"NanoAct 고객지원 &nbsp;·&nbsp; 궁금한 점은 스태프에게 편하게 문의해 주세요"
+      "hero.title":"Ride free.<br>Ask easy.",
+      "hero.sub":"이용 방법 확인, 문의, 긴급 상황 대응까지 필요한 창구에 바로 접근할 수 있는 종합 안내 페이지입니다.",
+      "panel.title":"HUV 이용 중 필요한 안내를 여기에서 확인하세요.",
+      "panel.desc":"여행 중 이동의 흐름이 끊기지 않도록 사용 방법, 문의, 긴급 상황 안내를 한곳에 모았습니다.",
+      "card1.type":"Guide","card1.title":"사용 방법 및 자주 묻는 질문","card1.desc":"차량의 기본 사용법, 조작 방법, 이용 전 주의사항, 자주 묻는 질문을 확인할 수 있습니다.",
+      "card2.type":"Contact","card2.title":"문의 양식","card2.desc":"궁금한 점이나 상담이 필요한 경우 이 양식을 통해 내용을 보내주세요.",
+      "card3.type":"Emergency","card3.title":"긴급 상황 안내","card3.desc":"사고·충돌이나 차량 문제가 발생했을 때의 대응 절차를 확인할 수 있습니다."
     }
   };
 
@@ -470,10 +479,10 @@
   };
 
   const LANG_TITLES = {
-    ja: 'ご利用案内・お問い合わせ | NanoAct',
-    en: 'Support & Contact | NanoAct',
-    zh: '使用指南・联系我们 | NanoAct',
-    ko: '이용 안내・문의하기 | NanoAct'
+    ja: 'ご利用案内・お問い合わせ | HUV',
+    en: 'Support & Contact | HUV',
+    zh: '使用指南・联系我们 | HUV',
+    ko: '이용 안내・문의하기 | HUV'
   };
 
   function applyLang(lang) {
@@ -487,7 +496,7 @@
       });
       document.documentElement.lang = lang;
       document.body.style.fontFamily = LANG_FONT[lang];
-      document.title = LANG_TITLES[lang] || 'NanoAct Support';
+      document.title = LANG_TITLES[lang] || 'HUV Support';
       document.body.classList.remove('lang-switching');
     }, 120);
     document.querySelectorAll('.lang-btn').forEach(btn => {
